@@ -6,7 +6,7 @@ Projeto para as atividades do [Hackathon 1746] (http://www.rio.rj.gov.br/web/hac
 Com o projeto a população vai poder criar solicitações no 1746 de forma muito mais **fácil e rápida** através do Twitter e aplicativo no Facebook, Smarthphones.
  
 
-O ficou pronto em 28 horas e 5 minutos?
+O que ficou pronto em 28 horas e 5 minutos?
 ============
 
 Funcionalidades básicas
