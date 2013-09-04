@@ -4,7 +4,7 @@ Hackathon1746
 Projeto para as atividades do [Hackathon 1746] (http://www.rio.rj.gov.br/web/hackathon)
 
 Com o projeto a população vai poder criar solicitações no 1746 de forma muito mais **fácil e rápida** através do Twitter e aplicativo no Facebook, Smarthphones.
- 
+
 
 O que ficou pronto em 28 horas e 5 minutos?
 ============
@@ -38,6 +38,14 @@ O que não está pronto (ainda!)
 		
 2. Acessar o link contido na resposta ao seu tweet e finalizar cadastro de ocorrência
 
+Ferramentas
+==========
+
+ * [Vraptor] (http://vraptor.caelum.com.br/pt/)
+ * [Hibernate] (http://www.hibernate.org/)
+ * [MySQL] (http://www.mysql.com/)
+ * [Apache Tomcat] (http://tomcat.apache.org/)
+ * [Bootstrap] (http://getbootstrap.com/2.3.2/)
 
 Equipe NameleZ
 ==========
