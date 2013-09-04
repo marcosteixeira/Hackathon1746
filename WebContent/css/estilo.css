@@ -1,0 +1,54 @@
+html, body {
+	height: 100%;
+}
+
+#divgeral{
+	min-height: 100%;
+	position: relative;
+}
+
+#conteudo {
+	padding-bottom: 65px;
+}
+
+#rodape{
+	color: white;
+	text-align: center;
+	color: black;
+	text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	width: 100%;
+	padding: 0px;
+	position: absolute;
+	bottom: 0px;
+}
+
+#rodape a{
+	font-size: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #DEDEDE;
+}
+#rodape a:hover{
+	text-decoration: none;
+	color: #A0A0A0;
+}
+
+.obrigatorio{
+	color: red;
+}
+
+.opcional{
+	color: blue;
+}
+
+.input_file{
+	background-color: #DEDEDE;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 3px !important;
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>hackathon</display-name>
+  <filter>
+    <filter-name>vraptor</filter-name>
+    <filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
+  </filter>
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>br.com.hackathon.common.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>encodings</param-name>
+      <param-value>US-ASCII, UTF-8, EUC-KR, ISO-8859-15, ISO-8859-1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>inputEncodingParameterName</param-name>
+      <param-value>ie</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>vraptor</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <context-param>
+    <description>VRaptor handles HTTP requests in UTF-8 format</description>
+    <param-name>br.com.caelum.vraptor.encoding</param-name>
+    <param-value>UTF-8</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+    <param-value>pt_BR</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>messages</param-value>
+  </context-param>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/erroInesperado.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/erro404.jsp</location>
+  </error-page>
+  <session-config>
+    <session-timeout>90</session-timeout>
+  </session-config>
+  <listener>
+    <listener-class>br.com.hackathon.modelo.auxiliar.ControleAcesso</listener-class>
+  </listener>
+  <listener>
+    <listener-class>
+  		br.com.hackathon.common.ContextListener
+  	</listener-class>
+  </listener>
+</web-app>
