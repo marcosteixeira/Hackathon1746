@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
 import br.com.hackathon.hibernate.Buscador;
 import br.com.hackathon.modelo.entidade.Assinatura;
 import br.com.hackathon.modelo.entidade.Endereco;
@@ -16,9 +17,6 @@ import br.com.hackathon.services.BaseService;
 import br.com.hackathon.services.OcorrenciaService;
 import br.com.hackathon.sessao.SessaoGeral;
 import br.com.hackathon.util.Util;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Resource
 public class OcorrenciaController {
@@ -66,19 +64,21 @@ public class OcorrenciaController {
 		}else{
 			new OcorrenciaService(this.validator).validarCidade(ocorrencia.getEndereco().getCidade());
 			result.include("servicos", new Buscador().listar2(new Servico()));
-			
-			Ocorrencia filtro = new Ocorrencia();
-			filtro.setEndereco(new Endereco());
-			filtro.getEndereco().setBairro(ocorrencia.getEndereco().getBairro());
-			
-			List<Ocorrencia> lista = new Buscador().listar2(filtro);
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
-			String json = gson.toJson(lista);
-			result.include("ocorrencias", json);
 			sessaoGeral.setOcorrencia(ocorrencia);
 		}
 
 		return ocorrencia;
+	}
+	
+	@Path("/ocorrencia/{ocorrencia.endereco.bairro}")
+	public void  autocompletarOcorrenciasProximas(Ocorrencia ocorrencia){
+		Ocorrencia filtro = new Ocorrencia();
+		filtro.setEndereco(new Endereco());
+		filtro.getEndereco().setBairro(ocorrencia.getEndereco().getBairro());
+		
+		List<Ocorrencia> lista = new Buscador().listar2(filtro);
+		result.use(Results.json()).from(lista).include("endereco").include("servico").serialize();
+		
 	}
 	
 	@Path("/ocorrencia/visualizarOcorrencia/{ocorrencia.link}")

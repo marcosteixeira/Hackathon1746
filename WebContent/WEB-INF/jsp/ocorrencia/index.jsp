@@ -17,7 +17,7 @@
 			</ul>
 			
 			<div class="span3" style="font-color: gray; margin-top: 30px;">
-				<h3 style="margin-bottom: 0px; text-align: center;">Talvez já existam solicitações de ocorrências próximo desta área.</h3>
+				<h3 style="margin-bottom: 0px; text-align: center;">Talvez já existam solicitações de ocorrências próximas desta área.</h3>
 				<p style="padding: 10px;">Veja as solicitações próximas no mapa e verifique se a sua já não foi criada. Basta escolher o ponto no próprio mapa caso a solicitação já tenha sido criada. <b>Caso deseje criar uma nova ocorrência, clique no botão abaixo:</b> </p>
 				<hr />
 				<form id="form_criar" action="<c:url value="/ocorrencia/criarOcorrencia"/>" method="POST">
@@ -35,78 +35,34 @@
     </div>
     
 	<script>
-		var ocorrenciasJavaScript = "";
-		// Creating a LatLng object containing the coordinate for the center of the map
-		var latlng = new google.maps.LatLng("${ocorrencia.endereco.latitude}", "${ocorrencia.endereco.longitude}");
-		  
-		// Creating an object literal containing the properties we want to pass to the map  
-		var options = {  
-			zoom: 16, // This number can be set to define the initial zoom level of the map
-			center: latlng,
-			mapTypeId: google.maps.MapTypeId.ROADMAP // This value can be set to define the map type ROADMAP/SATELLITE/HYBRID/TERRAIN
-		};  
-		// Calling the constructor, thereby initializing the map  
-		var map = new google.maps.Map(document.getElementById('map_div'), options);  
-		ocorrenciasJavaScript = ${ocorrencias} ;
-	  
-		var markers = [];
-		var image = "";
-   	  for (var i = 0; i < ocorrenciasJavaScript.length; i++) {
-   		  
-   		  if(ocorrenciasJavaScript[i].servico.nome == "Poda de árvores"){
-	   	   	image = new google.maps.MarkerImage('../images/arvore.png',
-	   			        new google.maps.Size(129, 42),
-	   			        new google.maps.Point(0,0),
-	   			        new google.maps.Point(18, 42)
-	 			    );
-   		  }else if (ocorrenciasJavaScript[i].servico.nome == "Iluminação pública"){
-  	   	   	image = new google.maps.MarkerImage('../images/lampada.png',
-   			        new google.maps.Size(129, 42),
-   			        new google.maps.Point(0,0),
-   			        new google.maps.Point(18, 42)
- 			    );
-
-   		  }else if(ocorrenciasJavaScript[i].servico.nome == "Conservação de vias"){
-  	   	   	image = new google.maps.MarkerImage('../images/buraco.png',
-   			        new google.maps.Size(129, 42),
-   			        new google.maps.Point(0,0),
-   			        new google.maps.Point(18, 42)
- 			    );
-   		  }else if(ocorrenciasJavaScript[i].servico.nome == "Estacionamento irregular"){
-  	   	   	image = new google.maps.MarkerImage('../images/estacionamento.png',
-   			        new google.maps.Size(129, 42),
-   			        new google.maps.Point(0,0),
-   			        new google.maps.Point(18, 42)
- 			    );
-
-   		  }
-   		  var marker = new google.maps.Marker({
-	 		  position: new google.maps.LatLng(ocorrenciasJavaScript[i].endereco.latitude, ocorrenciasJavaScript[i].endereco.longitude),
-   		      map: map,
-   		      icon: image
-   	      });
-		
-   		var link = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split('/')[1];
-   		var infowindow = new google.maps.InfoWindow({  
-   			content:  createInfo(ocorrenciasJavaScript[i].servico.nome, ocorrenciasJavaScript[i].endereco.bairro+',<br/>'+ocorrenciasJavaScript[i].endereco.logradouro+ ','+ ocorrenciasJavaScript[i].endereco.numero+' <br /><a href="'+link+'/ocorrencia/visualizarOcorrencia/'+ocorrenciasJavaScript[i].link +'" title="Acessar ocorrência">Acessar ocorrência</a>')
-   		});
-
-   	    makeInfoWindowEvent(map, infowindow, marker);
-   	    
-   	    markers.push(marker);
-
-	  }
-   	
-   	  function makeInfoWindowEvent(map, infowindow, marker) {
-   	  google.maps.event.addListener(marker, 'click', function() {
-   	    infowindow.open(map, marker);
-   	  });
-   	}
-	// Create information window
-	function createInfo(title, content) {
-		return '<div class="infowindow"><strong>'+ title +'</strong><br />'+content+'</div>';
-	} 
-	
+		function initialize() {
+			  var mapOptions = {
+			    zoom: 16,
+			    center: new google.maps.LatLng("${ocorrencia.endereco.latitude}", "${ocorrencia.endereco.longitude}"),
+			    mapTypeId: google.maps.MapTypeId.ROADMAP
+			  };
+			  var map = new google.maps.Map(document.getElementById('map_div'),
+			      mapOptions);
+			  
+			  
+			  var contexto = window.location.pathname.split('/')[1];
+			  var link = window.location.protocol + "//" + window.location.host + "/"+ contexto
+			  
+			  $.getJSON('/hackathon/ocorrencia/${ocorrencia.endereco.bairro}', function(data) {
+				  $.each(data, function(key, item) {
+					  $.each(item, function(chave, item2) {
+						  var pos = new google.maps.LatLng(item2.endereco.latitude,item2.endereco.longitude);
+						  var infowindow = new google.maps.InfoWindow({
+						        map: map,
+						        position: pos,
+						        content: item2.servico.nome +"<br/>"+ item2.endereco.logradouro + ", "+ item2.endereco.numero+'<br/> <a href="'+link+'/ocorrencia/visualizarOcorrencia/'+item2.link +'" title="Acessar ocorrência">Acessar ocorrência</a>'
+						      });
+					  });
+				  });
+				});
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     
 <%@ include file="/rodapeBase.jsp" %>

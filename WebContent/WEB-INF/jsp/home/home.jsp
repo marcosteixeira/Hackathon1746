@@ -46,8 +46,8 @@
         	var latitude = "";
         	var longitude = "";
         	
-        	latitude = result.geometry.location.qb;
-        	longitude = result.geometry.location.pb;
+        	latitude = result.geometry.location.pb;
+        	longitude = result.geometry.location.qb;
         	
         	for (var i=0;i < result.address_components.length; i++){
         
