@@ -27,7 +27,7 @@
   			<button class="btn btn-primary" type="button">Login com Facebook</button>
   			<a href="#modalLogin" role="button" class="btn" data-toggle="modal">Já tenho cadastro</a>
 		</p>
-        <form class="form-inline" style="padding: 10px;" action="<c:url value="/ocorrencia/confirmarOcorrencia"/>">
+        <form class="form-inline" style="padding: 10px;" action="<c:url value="/ocorrencia/confirmarOcorrencia"/>" method="post" >
         	<div class="control-group">
         		<label class="control-label"><fmt:message key="nome"/> <span class="obrigatorio"><fmt:message key="obrigatorio"/></span></label>
       		 	<div class="controls"><input name="usuario.nome" type="text" class="input-xlarge" id="nome" placeholder="<fmt:message key="digite_seu_nome_completo"/>" required="required"></div>
@@ -69,7 +69,7 @@
   <div id="modalLogin" class="modal-body">
     <p>
     
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="POST">
 		  <div class="control-group">
 		    <label class="control-label" for="inputEmail">Email</label>
 		    <div class="controls">

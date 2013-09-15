@@ -30,9 +30,9 @@ public class Endereco implements Entidade, Serializable {
 	@Expose
 	private String bairro;
 	@Expose
-	private Double latitude;
+	private String latitude;
 	@Expose
-	private Double longitude;
+	private String longitude;
 	private String pontoReferencia;
 	private String cep;
 	@Transient
@@ -80,19 +80,19 @@ public class Endereco implements Entidade, Serializable {
 		this.bairro = bairro;
 	}
 
-	public Double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public Double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 

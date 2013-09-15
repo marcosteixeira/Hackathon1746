@@ -55,7 +55,7 @@ public class OcorrenciaController {
 	}
 	
 	/**
-	 * Método de criar um ocorrência
+	 * Método de criar uma ocorrência
 	 * @param ocorrencia
 	 */
 	@Path("/ocorrencia/")

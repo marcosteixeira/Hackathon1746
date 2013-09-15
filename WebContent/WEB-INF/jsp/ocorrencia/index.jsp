@@ -20,7 +20,7 @@
 				<h3 style="margin-bottom: 0px; text-align: center;">Talvez já existam solicitações de ocorrências próximo desta área.</h3>
 				<p style="padding: 10px;">Veja as solicitações próximas no mapa e verifique se a sua já não foi criada. Basta escolher o ponto no próprio mapa caso a solicitação já tenha sido criada. <b>Caso deseje criar uma nova ocorrência, clique no botão abaixo:</b> </p>
 				<hr />
-				<form id="form_criar" action="<c:url value="/ocorrencia/criarOcorrencia"/>">
+				<form id="form_criar" action="<c:url value="/ocorrencia/criarOcorrencia"/>" method="POST">
 					<p style="text-align: center;">
 						<button class="btn btn-large btn-warning" type="button" onclick="document.getElementById('form_criar').submit();">Entendi! Criar nova solicitação mesmo assim</button><br/><br/>
 						<a href="/hackathon"><button class="btn btn-medium" type="button" onclick="document.getElementById('form_criar').submit();">Escolher Novo Endereço</button></a>

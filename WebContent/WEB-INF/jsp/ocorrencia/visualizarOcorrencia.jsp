@@ -55,7 +55,7 @@
   <div id="modalLogin" class="modal-body">
     <p>
     
-		<form class="form-horizontal" action="<c:url value="/ocorrencia/assinar"/>" >
+		<form class="form-horizontal" action="<c:url value="/ocorrencia/assinar"/>" method="POST">
 		  <div class="control-group">
 		    <label class="control-label"for="inputEmail">Email</label>
 		    <div class="controls">
